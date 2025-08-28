@@ -82,8 +82,8 @@ Attendify is a robust, dual-panel attendance application designed for organizati
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your_username/attendify.git
-    cd attendify
+    git clone https://github.com/DevUsama007/Attendify-Adnvance_attandance_system.git
+    cd Attendify-Adnvance_attandance_system
     ```
 
 2.  **Get dependencies:**
@@ -130,17 +130,6 @@ Important configuration files and steps:
 
 ---
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/your_username/attendify/issues).
-
-1. Fork the Project.
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the Branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
-
----
 
 ## 📄 License
 
@@ -152,9 +141,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Usama Basharat**
 
-- Portfolio: [Your Portfolio Link]
-- LinkedIn: [Your LinkedIn Profile Link]
-- Email: your.email@example.com
+- Portfolio: https://usama-basharat.web.app/
+- LinkedIn: linkedin.com/in/usama-basharat
+- Email: uuusam0026@gmail.com
 
 ---
 
