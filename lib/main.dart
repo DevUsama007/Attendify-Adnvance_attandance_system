@@ -1,10 +1,5 @@
 import 'package:attendify/app/data/embadingrepo.dart';
 import 'package:attendify/app/res/routes/routes.dart';
-import 'package:attendify/app/view/adminPanelScreens/adminHomeScreen.dart';
-import 'package:attendify/app/view/adminPanelScreens/adminLoginScreen.dart';
-import 'package:attendify/app/view/adminPanelScreens/adminSplashScreen.dart';
-import 'package:attendify/app/view/cameraScreens/camera_view.dart';
-import 'package:attendify/app/view/userPanelScreens/userHomeScreen.dart';
 import 'package:attendify/app/view/userPanelScreens/userSplashScreen.dart';
 import 'package:attendify/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
