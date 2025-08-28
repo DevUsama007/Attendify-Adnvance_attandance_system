@@ -1,7 +1,7 @@
 # Attendify - Advanced Attendance System
 
 <p align="center">
-  <img src="https://github.com/DevUsama007/Attendify-Adnvance_attandance_system/blob/main/attendify.png" alt="Attendify Logo" width="200"/>
+  <img src="https://github.com/DevUsama007/Attendify-Adnvance_attandance_system/blob/main/attendify.png" alt="Attendify Logo" width="300"/>
   <br>
   <strong>A modern, secure, and automated attendance management system built with Flutter.</strong>
   <br>
