@@ -7,6 +7,8 @@ class RouteName {
   static String adminViewUserScreen = '/AdminViewUserScreen';
   static String adminRecentActivitiesScreen = '/AdminRecentActivitiesScreen';
   static String adminTodayReportScreen = '/AdminTodayReportScreen';
+  static String adminManageUserList = '/AdminManageUserList';
+  static String adminManageAttandanceList = '/AdminManageAttandanceList';
 
   //user panel routes names
   static String userSplashScreen = '/UserSplashScreen';

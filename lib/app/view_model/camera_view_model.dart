@@ -144,6 +144,7 @@ class CameraViewModel extends GetxController {
                   updateFaceVerificationMessage(
                       'updating ${sessionName.value} Attendance');
                   Map<String, dynamic> data = {
+                    'username': userName.value.toString(),
                     'checkInTime': CalendarUtils().getCurrentTime12Hour(),
                     'checkInAmPm': CalendarUtils().getAmPm(),
                     'checkInDate': CalendarUtils.getCurrentDate().toString(),
@@ -169,6 +170,7 @@ class CameraViewModel extends GetxController {
                   updateFaceVerificationMessage(
                       'updating ${sessionName.value} Attendance');
                   Map<String, dynamic> data = {
+                    'username': userName.value.toString(),
                     'checkOutTime': CalendarUtils().getCurrentTime12Hour(),
                     'checkOUtAmPm': CalendarUtils().getAmPm(),
                     'checkOutDate': CalendarUtils.getCurrentDate().toString(),

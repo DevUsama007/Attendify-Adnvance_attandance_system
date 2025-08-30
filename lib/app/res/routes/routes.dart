@@ -1,6 +1,8 @@
 import 'package:attendify/app/res/routes/routes_name.dart';
 import 'package:attendify/app/view/adminPanelScreens/adminLoginScreen.dart';
 import 'package:attendify/app/view/adminPanelScreens/adminSplashScreen.dart';
+import 'package:attendify/app/view/adminPanelScreens/admin_manage_attandance/admin_manage_attandance_list.dart';
+import 'package:attendify/app/view/adminPanelScreens/admin_manage_attandance/admin_manage_user_list.dart';
 import 'package:attendify/app/view/userPanelScreens/userHomeScreen.dart';
 import 'package:attendify/app/view/userPanelScreens/userSplashScreen.dart';
 import 'package:attendify/app/view/userPanelScreens/userloginScreen.dart';
@@ -46,6 +48,17 @@ class ApprRoutes {
           name: RouteName.adminRecentActivitiesScreen,
           page: () => AdminRecentActivitiesScreen(
                 pageTitle: '',
+              ),
+          transition: Transition.downToUp),
+      GetPage(
+          name: RouteName.adminManageUserList,
+          page: () => AdminManageUserList(),
+          transition: Transition.downToUp),
+      GetPage(
+          name: RouteName.adminManageAttandanceList,
+          page: () => AdminManageAttandanceList(
+                username: '',
+                name: '',
               ),
           transition: Transition.downToUp),
       GetPage(

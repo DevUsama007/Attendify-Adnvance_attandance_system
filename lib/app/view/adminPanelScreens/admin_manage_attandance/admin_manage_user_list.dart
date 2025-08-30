@@ -1,23 +1,22 @@
-import 'package:attendify/app/res/app_assets.dart';
+import 'package:attendify/app/view/adminPanelScreens/admin_manage_attandance/admin_manage_attandance_list.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../custom_widget/custom_skeletonizer_widget.dart';
-import '../../custom_widget/user_homeScreen_widgets/recent_activity_loading_widget.dart';
-import '../../custom_widget/user_homeScreen_widgets/recent_activity_widget.dart';
-import '../../res/appTextStyles.dart';
-import '../../res/app_colors.dart';
-import '../../utils/calendar_utils.dart';
+import '../../../custom_widget/custom_skeletonizer_widget.dart';
+import '../../../custom_widget/user_homeScreen_widgets/recent_activity_loading_widget.dart';
+import '../../../res/appTextStyles.dart';
+import '../../../res/app_colors.dart';
+import '../admin_view_user_screen.dart';
 
-class AdminViewUserScreen extends StatefulWidget {
-  const AdminViewUserScreen({super.key});
+class AdminManageUserList extends StatefulWidget {
+  const AdminManageUserList({super.key});
 
   @override
-  State<AdminViewUserScreen> createState() => _AdminViewUserScreenState();
+  State<AdminManageUserList> createState() => _AdminManageUserListState();
 }
 
-class _AdminViewUserScreenState extends State<AdminViewUserScreen> {
+class _AdminManageUserListState extends State<AdminManageUserList> {
   FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
@@ -173,8 +172,14 @@ class _AdminViewUserScreenState extends State<AdminViewUserScreen> {
                               'Total Employees(${employees.length})',
                               style: AppTextStyles.customTextbolddark14(),
                             ).paddingOnly(top: 10, left: 20, right: 20),
-                          userViewWidget(username, name, password)
-                              .paddingOnly(left: 20, right: 20, top: 20),
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => AdminManageAttandanceList(
+                                  username: username,name: name,));
+                            },
+                            child: userViewWidget(username, name, password)
+                                .paddingOnly(left: 20, right: 20, top: 20),
+                          ),
                         ],
                       ),
                     );
@@ -200,90 +205,5 @@ class _AdminViewUserScreenState extends State<AdminViewUserScreen> {
         ],
       ),
     );
-    
   }
-}
-
-Widget userViewWidget(
-  String username,
-  String name,
-  String password,
-) {
-  return Container(
-    width: Get.width,
-    height: 110,
-    decoration: BoxDecoration(
-        borderRadius: BorderRadiusDirectional.circular(10),
-        image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.2), BlendMode.darken),
-            fit: BoxFit.cover,
-            image: AssetImage(AppAssets.bgImage2))),
-    child: Column(
-      children: [
-        Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: Colors.white.withOpacity(0.6),
-              child: Icon(
-                Icons.person,
-              ),
-            ),
-            SizedBox(
-              width: 30,
-            ),
-            Text(
-              name.toString().toUpperCase(),
-              style: AppTextStyles.customText(
-                  fontSize: 16, color: AppColors.scaffoldDark.withOpacity(0.8)),
-            )
-          ],
-        ),
-        Divider(
-          height: 5,
-          color: Colors.white.withOpacity(0.5),
-        ),
-        Row(
-          children: [
-            SizedBox(
-              width: 50,
-            ),
-            Text(
-              'UserName: ',
-              style: AppTextStyles.customText(
-                  fontSize: 14, fontWeight: FontWeight.w900),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Text(
-              username,
-              style: AppTextStyles.customText(
-                  fontSize: 14, fontWeight: FontWeight.w100),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            SizedBox(
-              width: 50,
-            ),
-            Text(
-              'password: ',
-              style: AppTextStyles.customText(
-                  fontSize: 14, fontWeight: FontWeight.w900),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Text(
-              password,
-              style: AppTextStyles.customText(
-                  fontSize: 14, fontWeight: FontWeight.w100),
-            ),
-          ],
-        )
-      ],
-    ).paddingSymmetric(horizontal: 10, vertical: 10),
-  );
 }

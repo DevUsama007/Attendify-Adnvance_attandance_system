@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import '../../custom_widget/custom_bottom_sheet.dart';
+import '../../custom_widget/logout_widget.dart';
 import '../../custom_widget/user_homeScreen_widgets/empty_overview_widget.dart';
 import '../../custom_widget/user_homeScreen_widgets/error_overview_widget.dart';
 import '../../custom_widget/user_homeScreen_widgets/overview_widget.dart';
@@ -68,12 +70,27 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                             size: 25,
                           ),
                         ).paddingOnly(right: 8.0),
-                        CircleAvatar(
-                          backgroundColor: AppColors.iconbgColor,
-                          child: Icon(
-                            Icons.person,
-                            color: AppColors.iconDark,
-                            size: 25,
+                        InkWell(
+                          onTap: () {
+                             CustomBottomSheet.show(
+                                height: 200,
+                                context: context,
+                                child: logoutWidget(
+                                  () {
+                                    homepageController.logoutUser();
+                                  },
+                                  () {
+                                    Navigator.pop(context);
+                                  },
+                                ));
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: AppColors.iconbgColor,
+                            child: Icon(
+                              Icons.person,
+                              color: AppColors.iconDark,
+                              size: 25,
+                            ),
                           ),
                         ),
                       ],

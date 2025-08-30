@@ -1,5 +1,7 @@
 import 'package:attendify/app/data/embadingrepo.dart';
 import 'package:attendify/app/res/routes/routes.dart';
+import 'package:attendify/app/view/adminPanelScreens/adminSplashScreen.dart';
+import 'package:attendify/app/view/userPanelScreens/userHomeScreen.dart';
 import 'package:attendify/app/view/userPanelScreens/userSplashScreen.dart';
 import 'package:attendify/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
 import 'app/services/facerecoginition.dart';
+import 'app/view/adminPanelScreens/adminHomeScreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +33,7 @@ class Attendify extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: UserSplashScreen(),
+      home: AdminSplashScreen(),
     );
   }
 }

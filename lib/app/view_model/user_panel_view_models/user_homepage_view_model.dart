@@ -1,6 +1,7 @@
 import 'package:attendify/app/data/user_homepage_repo.dart';
 import 'package:attendify/app/res/app_string.dart';
 import 'package:attendify/app/utils/notificatinoUtils.dart';
+import 'package:attendify/app/view/userPanelScreens/userSplashScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -80,6 +81,14 @@ class UserHomepageViewModel extends GetxController {
         userId.value = '';
       }
     });
+  }
+
+  logoutUser() {
+    StorageService.remove(AppStrings.storageUserId).then(
+      (value) {
+        Get.offAll(UserSplashScreen());
+      },
+    );
   }
 
   Future<DocumentSnapshot> getOverviewdate(String sessionName) {

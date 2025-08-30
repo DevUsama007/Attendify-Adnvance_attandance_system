@@ -1,4 +1,6 @@
+import 'package:attendify/app/custom_widget/custom_bottom_sheet.dart';
 import 'package:attendify/app/custom_widget/custom_button_widget.dart';
+import 'package:attendify/app/custom_widget/logout_widget.dart';
 import 'package:attendify/app/res/appTextStyles.dart';
 import 'package:attendify/app/res/app_colors.dart';
 import 'package:attendify/app/res/routes/routes_name.dart';
@@ -68,12 +70,27 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                               ),
                             ).paddingOnly(right: 8.0),
                           ),
-                          CircleAvatar(
-                            backgroundColor: AppColors.iconbgColor,
-                            child: Icon(
-                              Icons.person,
-                              color: AppColors.iconDark,
-                              size: 25,
+                          InkWell(
+                            onTap: () {
+                              CustomBottomSheet.show(
+                                  height: 200,
+                                  context: context,
+                                  child: logoutWidget(
+                                    () {
+                                      _homeController.logoutAdmin();
+                                    },
+                                    () {
+                                      Navigator.pop(context);
+                                    },
+                                  ));
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: AppColors.iconbgColor,
+                              child: Icon(
+                                Icons.person,
+                                color: AppColors.iconDark,
+                                size: 25,
+                              ),
                             ),
                           ),
                         ],
@@ -141,10 +158,13 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                 ? Get.toNamed(RouteName.adminAddNewUser)
                                 : index == 1
                                     ? Get.toNamed(RouteName.adminViewUserScreen)
-                                    : index == 3
+                                    : index == 2
                                         ? Get.toNamed(
-                                            RouteName.adminTodayReportScreen)
-                                        : null;
+                                            RouteName.adminManageUserList)
+                                        : index == 3
+                                            ? Get.toNamed(RouteName
+                                                .adminTodayReportScreen)
+                                            : null;
                           },
                         ).paddingSymmetric(horizontal: 10, vertical: 10);
                       }),

@@ -1,6 +1,7 @@
 import 'package:attendify/app/res/app_string.dart';
 import 'package:attendify/app/utils/calendar_utils.dart';
 import 'package:attendify/app/utils/storage_utils.dart';
+import 'package:attendify/app/view/adminPanelScreens/adminSplashScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +23,14 @@ class AdminHomepageViewModel extends GetxController {
         adminName.value = '-------';
       }
     });
+  }
+
+  logoutAdmin() {
+    StorageService.remove(AppStrings.storageAdminId).then(
+      (value) {
+        Get.offAll(AdminSplashScreen());
+      },
+    );
   }
 
   Future<Map<String, dynamic>?> fetchTheRecentActivity() {
