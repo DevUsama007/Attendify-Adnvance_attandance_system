@@ -1,5 +1,6 @@
 import 'package:attendify/app/res/app_string.dart';
 import 'package:attendify/app/res/routes/routes_name.dart';
+import 'package:attendify/app/services/noitfication_services/notification_services.dart';
 import 'package:attendify/app/utils/notificatinoUtils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import '../../utils/storage_utils.dart';
 
 class AdminLoginViewModel extends GetxController {
   FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  NotificationServices _notificationServices = NotificationServices();
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -42,7 +44,7 @@ class AdminLoginViewModel extends GetxController {
               context, 'Success', 'Welcome to Attendify', true);
           storeAdminData(
               authData.data()!['Name'], authData.data()!['username']);
-          Get.offAllNamed(RouteName.adminHomeScreen);
+          loginServices(context);
         } else {
           // Login failed
           NotificationUtils.showSnackBar(
@@ -65,5 +67,31 @@ class AdminLoginViewModel extends GetxController {
   storeAdminData(String name, String username) {
     StorageService.save(AppStrings.storageAdminName.toString(), name);
     StorageService.save(AppStrings.storageAdminId.toString(), username);
+  }
+
+  loginServices(BuildContext context) async {
+    await _notificationServices.getDeviceToken().then(
+      (value) {
+        storeDeviceId(value.toString(), context);
+      },
+    );
+  }
+
+  storeDeviceId(String deviceId, BuildContext context) async {
+    await _firebaseFirestore
+        .collection('attendify')
+        .doc('AdminCradentials')
+        .set(
+            {'deviceToken': deviceId.toString()}, SetOptions(merge: true)).then(
+      (value) {
+        Get.offAllNamed(RouteName.adminHomeScreen);
+      },
+    ).onError(
+      (error, stackTrace) {
+        toggleLoading(false);
+        NotificationUtils.showSnackBar(
+            context, 'Error', 'An error occurred: ${error.toString()}', false);
+      },
+    );
   }
 }

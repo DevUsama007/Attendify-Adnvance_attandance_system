@@ -152,3 +152,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Flutter team for the amazing framework.
 - Firebase and Google ML Kit for powerful backend and ML tools.
 - The open-source community for invaluable packages.
+
+
+<!-- //tflite model issue solution on chatgppt -->
+<!-- https://chat.deepseek.com/a/chat/s/eada7704-4ae9-483b-a9cc-e707284d46c0 -->

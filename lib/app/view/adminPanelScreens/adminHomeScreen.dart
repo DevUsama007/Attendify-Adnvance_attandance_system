@@ -14,6 +14,8 @@ import '../../custom_widget/custom_skeletonizer_widget.dart';
 import '../../custom_widget/user_homeScreen_widgets/recent_activity_error_widget.dart';
 import '../../custom_widget/user_homeScreen_widgets/recent_activity_loading_widget.dart';
 import '../../custom_widget/user_homeScreen_widgets/recent_activity_widget.dart';
+import '../../services/noitfication_services/notification_services.dart';
+import '../../services/noitfication_services/send_notifcation_service.dart';
 import '../../utils/calendar_utils.dart';
 
 class AdminHomeScreen extends StatefulWidget {
@@ -24,6 +26,7 @@ class AdminHomeScreen extends StatefulWidget {
 }
 
 class _AdminHomeScreenState extends State<AdminHomeScreen> {
+  NotificationServices _notificationServices = NotificationServices();
   AdminHomepageViewModel _homeController = Get.put(AdminHomepageViewModel());
   List<String> adminFunctions = [
     "Add Users",
@@ -31,6 +34,14 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
     "Today Report",
     "View Users"
   ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _notificationServices.requestNotificationPermission();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,12 +106,33 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                           ),
                         ],
                       ).paddingOnly(top: 40, bottom: 10),
-                      Text(
-                        'Time to do what you do best',
-                        style: AppTextStyles.customText(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w100,
-                          color: AppColors.textPrimaryDark.withOpacity(0.6),
+                      InkWell(
+                        onTap: () {
+                          print('object');
+                          _notificationServices.getDeviceToken().then(
+                            (value) async {
+                              print('Deviev token :${value}');
+                              await SendNotificationService.sendNotificationService(
+                                  // value.toString(),
+                                  'chXGsu6uToKyMzt3AZgMDg:APA91bGsGYQtSnG585hdtTwAoXBEBXUNZ7n0toSw0nH23DFMleJYK1AvvjDYFB1g2oeSsPm47Q2fW6BFNQwUp79YOMKKXi7VrYjTPF7tFgqIAnTgIPkufP0',
+                                  "Usama Notification",
+                                  "I am here for coding",
+                                  {'screen': "Cart Screen", 'type': "dumy"});
+                              // print('Device token');
+                              // print(value);
+                            },
+                          );
+                          // String token =
+                          //     await _notificationServices.getDeviceToken();
+                          // print(token.toString());
+                        },
+                        child: Text(
+                          'Time to do what you do best',
+                          style: AppTextStyles.customText(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w100,
+                            color: AppColors.textPrimaryDark.withOpacity(0.6),
+                          ),
                         ),
                       )
                     ],

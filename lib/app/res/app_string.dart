@@ -10,4 +10,5 @@ class AppStrings {
 
   static String storageAdminName = 'admin_name';
   static String storageAdminId = 'admin_username';
+
 }

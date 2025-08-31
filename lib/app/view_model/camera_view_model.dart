@@ -15,6 +15,7 @@ import 'package:path/path.dart';
 import '../data/embadingrepo.dart';
 import '../data/user_homepage_repo.dart';
 import '../services/facerecoginition.dart';
+import '../services/noitfication_services/send_notifcation_service.dart';
 import '../utils/calendar_utils.dart';
 import '../utils/notificatinoUtils.dart';
 import 'user_panel_view_models/user_homepage_view_model.dart';
@@ -25,6 +26,7 @@ class CameraViewModel extends GetxController {
   UserHomepageViewModel homepageController = Get.put(UserHomepageViewModel());
   late CameraController controller;
   final FaceEmbeddingExtractor _embeddingExtractor = FaceEmbeddingExtractor();
+  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   Embadingrepo _embadingrepo = Embadingrepo();
   RxString sessionName = ''.obs;
 
@@ -307,7 +309,29 @@ class CameraViewModel extends GetxController {
       'personName': personName.value.toString(),
       'timestamp': FieldValue.serverTimestamp(),
     };
-    await _homepageRepo.addTodayRecentActivity(
-        data, userName.value.toString(), session.toString());
+    await _homepageRepo
+        .addTodayRecentActivity(
+            data, userName.value.toString(), session.toString())
+        .then(
+      (value) {
+        sendNotificationToAdmin(
+            session,
+            '${CalendarUtils().getCurrentTime12Hour()} ${CalendarUtils().getAmPm()}',
+            personName.toString());
+      },
+    );
+  }
+
+  sendNotificationToAdmin(String session, String time, String name) async {
+    final deviceToken = await _firebaseFirestore
+        .collection('attendify')
+        .doc('AdminCradentials')
+        .get();
+    print(deviceToken.data()!['deviceToken']);
+    await SendNotificationService.sendNotificationService(
+        deviceToken.data()!['deviceToken'],
+        session,
+        '${name} at ${time}',
+        {'screen': "Cart Screen", 'type': "dumy"});
   }
 }

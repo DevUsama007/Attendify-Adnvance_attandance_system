@@ -1,5 +1,6 @@
 import 'package:attendify/app/custom_widget/custom_skeletonizer_widget.dart';
 import 'package:attendify/app/res/app_colors.dart';
+import 'package:attendify/app/services/noitfication_services/get_server_key.dart';
 import 'package:attendify/app/view/userPanelScreens/user_recent_activities_screen.dart';
 import 'package:attendify/app/view_model/user_panel_view_models/user_homepage_view_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,6 +18,8 @@ import '../../custom_widget/user_homeScreen_widgets/recent_activity_widget.dart'
 import '../../res/appTextStyles.dart';
 import '../../res/app_assets.dart';
 import '../../res/routes/routes_name.dart';
+import '../../services/noitfication_services/notification_services.dart';
+import '../../services/noitfication_services/send_notifcation_service.dart';
 import '../../utils/calendar_utils.dart';
 import 'checkUserLocationScreen.dart';
 
@@ -28,12 +31,15 @@ class UserHomeScreen extends StatefulWidget {
 }
 
 class _UserHomeScreenState extends State<UserHomeScreen> {
+  NotificationServices _notificationServices = NotificationServices();
   UserHomepageViewModel homepageController = Get.put(UserHomepageViewModel());
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    _notificationServices.requestNotificationPermission();
     homepageController.getUserData();
   }
 
@@ -72,7 +78,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                         ).paddingOnly(right: 8.0),
                         InkWell(
                           onTap: () {
-                             CustomBottomSheet.show(
+                            CustomBottomSheet.show(
                                 height: 200,
                                 context: context,
                                 child: logoutWidget(

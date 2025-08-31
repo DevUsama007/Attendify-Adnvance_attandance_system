@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../services/noitfication_services/notification_services.dart';
+import '../../services/noitfication_services/send_notifcation_service.dart';
 import '../../utils/calendar_utils.dart';
 import '../../utils/storage_utils.dart';
 
@@ -64,6 +66,7 @@ class UserHomepageViewModel extends GetxController {
   // }
 
   getUserData() async {
+    print('object');
     // This method can be used to fetch the admin name from storage or any other source
     await StorageService.read(AppStrings.storageUserName.toString())
         .then((value) {

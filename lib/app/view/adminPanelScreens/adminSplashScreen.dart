@@ -7,6 +7,7 @@ import 'package:loading_indicator/loading_indicator.dart';
 
 import '../../res/appTextStyles.dart';
 import '../../res/app_string.dart';
+import '../../services/noitfication_services/notification_services.dart';
 import '../../view_model/admin_view_models/admin_splash_screen_services.dart';
 
 class AdminSplashScreen extends StatefulWidget {
@@ -18,9 +19,20 @@ class AdminSplashScreen extends StatefulWidget {
 
 class _AdminSplashScreenState extends State<AdminSplashScreen> {
   SplashScreenServices _controler = Get.put(SplashScreenServices());
+
+  NotificationServices _notificationServices = NotificationServices();
   @override
   void initState() {
     super.initState();
+    _notificationServices.requestNotificationPermission();
+    _notificationServices.firebaseInit(context);
+    _notificationServices.setupInteractMessage(context);
+    // _notificationServices.isTokenRefresh();
+    _notificationServices.getDeviceToken().then(
+      (value) async {
+        print(value);
+      },
+    );
     _controler.splashDelayer();
   }
 
